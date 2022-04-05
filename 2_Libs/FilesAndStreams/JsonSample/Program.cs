@@ -1,4 +1,7 @@
-﻿Category appetizers = new("Appetizers");
+﻿using System.Text;
+using System.Text.Json;
+
+Category appetizers = new("Appetizers");
 appetizers.Items.Add(new Item("Dungeness Crab Cocktail", "Classic cocktail sauce", 27M));
 appetizers.Items.Add(new Item("Almond Crusted Scallops", "Almonds, Parmesan, chive beurre blanc", 19M));
 
