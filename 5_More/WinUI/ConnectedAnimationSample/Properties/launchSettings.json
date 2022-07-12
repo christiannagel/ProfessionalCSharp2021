@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ConnectedAnimationSample (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ConnectedAnimationSample (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

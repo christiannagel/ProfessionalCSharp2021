@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="ConnectedAnimationSample.Views.SelectionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ConnectedAnimationSample.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel>
+        <ComboBox 
+            x:Name="SelectedItem1"
+            Width="200"
+            ItemsSource="{x:Bind ViewModel.AvailableList}"
+            SelectedItem="{x:Bind ViewModel.SelectedItem1, Mode=TwoWay}"
+            ItemTemplate="{StaticResource ItemTemplate}" />
+        <ComboBox 
+            x:Name="SelectedItem2"
+            RelativePanel.RightOf="SelectedItem1"
+            Width="200"
+            ItemsSource="{x:Bind ViewModel.AvailableList}"
+            SelectedItem="{x:Bind ViewModel.SelectedItem2, Mode=TwoWay}"
+            ItemTemplate="{StaticResource ItemTemplate}" />
+        <AppBarButton
+            x:Name="AddButton"
+            RelativePanel.RightOf="SelectedItem2"
+            Icon="Add" 
+            Command="{x:Bind ViewModel.CopyItemsCommand, Mode=OneTime}" />
+        <AppBarButton
+            RelativePanel.RightOf="AddButton"
+            Icon="Clear"
+            Command="{x:Bind ViewModel.ClearListCommand, Mode=OneTime}" />
+
+    </RelativePanel>
+</UserControl>
