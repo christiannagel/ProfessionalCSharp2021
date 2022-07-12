@@ -5,7 +5,29 @@
     xmlns:models="using:ConnectedAnimationSample.Models"
     xmlns:converters="using:ConnectedAnimationSample.Converters"
     xmlns:local="using:ConnectedAnimationSample.Styles">
-    <converters:ItemToBrushConverter x:Key="ItemToBrushConverter" />
+
+
+    <RadialGradientBrush x:Key="RedBrush" GradientOrigin="0.7,0.2" Center="0.5,0.5">
+        <GradientStop Offset="1" Color="DarkRed" />
+        <GradientStop Offset="0" Color="OrangeRed" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GreenBrush" GradientOrigin="0.7,0.2" Center="0.5,0.5">
+        <GradientStop Offset="1" Color="DarkGreen" />
+        <GradientStop Offset="0" Color="LightGreen" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="BlueBrush" GradientOrigin="0.7,0.2" Center="0.5,0.5">
+        <GradientStop Offset="1" Color="DarkBlue" />
+        <GradientStop Offset="0" Color="LightBlue" />
+    </RadialGradientBrush>
+
+    <converters:ItemToBrushConverter 
+        x:Key="ItemToBrushConverter"
+        RedBrush="{StaticResource RedBrush}"
+        GreenBrush="{StaticResource GreenBrush}"
+        BlueBrush="{StaticResource BlueBrush}"/>
+
 
     <DataTemplate x:Key="ItemTemplate" x:DataType="models:Item">
         <Grid>

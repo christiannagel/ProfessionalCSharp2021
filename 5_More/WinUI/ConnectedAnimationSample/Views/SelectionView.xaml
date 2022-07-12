@@ -25,7 +25,7 @@
             x:Name="AddButton"
             RelativePanel.RightOf="SelectedItem2"
             Icon="Add" 
-            Command="{x:Bind ViewModel.CopyItemsCommand, Mode=OneTime}" />
+            Command="{x:Bind ViewModel.AddItemsCommand, Mode=OneTime}" />
         <AppBarButton
             RelativePanel.RightOf="AddButton"
             Icon="Clear"

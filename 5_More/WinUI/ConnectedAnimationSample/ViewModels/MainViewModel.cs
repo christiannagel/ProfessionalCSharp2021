@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 
 using ConnectedAnimationSample.Models;
 
@@ -23,11 +24,18 @@ public partial class MainViewModel
     private Item? _selectedItem2;
 
     [ICommand]
-    private void CopyItems()
+    private void AddItems()
     {
-        if (_selectedItem1 is not null && _selectedItem2 is not null)
+
+        
+        if (SelectedItem1 is not null && SelectedItem2 is not null)
         {
-            _addedItems.Add(new(_selectedItem1, _selectedItem2));
+            WeakReferenceMessenger.Default.Send(new AddItemMessage("Started"));
+            DisplayItem displayItem = new(SelectedItem1, SelectedItem2);
+            _addedItems.Add(displayItem);
+
+            WeakReferenceMessenger.Default.Send(new AddItemMessage("Completed", displayItem));
+
             SelectedItem1 = null;
             SelectedItem2 = null;
         }
@@ -42,3 +50,5 @@ public partial class MainViewModel
     [ObservableProperty]
     private ObservableCollection<DisplayItem> _addedItems = new ObservableCollection<DisplayItem>();
 }
+
+public record class AddItemMessage(string Status, DisplayItem? DisplayItem = default);

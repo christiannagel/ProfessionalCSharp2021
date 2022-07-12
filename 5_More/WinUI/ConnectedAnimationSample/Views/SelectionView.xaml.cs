@@ -1,10 +1,10 @@
-﻿using ConnectedAnimationSample.ViewModels;
+﻿using CommunityToolkit.Mvvm.Messaging;
+
+using ConnectedAnimationSample.ViewModels;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using Microsoft.UI.Xaml.Media.Animation;
 
 namespace ConnectedAnimationSample.Views;
 
@@ -13,6 +13,16 @@ public sealed partial class SelectionView : UserControl
     public SelectionView()
     {
         InitializeComponent();
+
+        WeakReferenceMessenger.Default.Register<AddItemMessage>(this, (r, m) =>
+        {
+            if (m.Status == "Started")
+            {
+                var connectedAnimation = ConnectedAnimationService.GetForCurrentView();
+                connectedAnimation?.PrepareToAnimate("item1", SelectedItem1);
+                connectedAnimation?.PrepareToAnimate("item2", SelectedItem2);
+            }
+        });
     }
 
     public MainViewModel ViewModel
