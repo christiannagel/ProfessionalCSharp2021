@@ -11,25 +11,28 @@
         <ComboBox 
             x:Name="SelectedItem1"
             Width="200"
-            ItemsSource="{x:Bind ViewModel.AvailableList}"
+            Height="200"
+            ItemsSource="{x:Bind ViewModel.AvailableList, Mode=OneWay}"
             SelectedItem="{x:Bind ViewModel.SelectedItem1, Mode=TwoWay}"
             ItemTemplate="{StaticResource ItemTemplate}" />
         <ComboBox 
             x:Name="SelectedItem2"
             RelativePanel.RightOf="SelectedItem1"
             Width="200"
-            ItemsSource="{x:Bind ViewModel.AvailableList}"
+            Height="200"
+            ItemsSource="{x:Bind ViewModel.AvailableList, Mode=OneWay}"
             SelectedItem="{x:Bind ViewModel.SelectedItem2, Mode=TwoWay}"
             ItemTemplate="{StaticResource ItemTemplate}" />
         <AppBarButton
             x:Name="AddButton"
             RelativePanel.RightOf="SelectedItem2"
+            RelativePanel.AlignVerticalCenterWith="SelectedItem2"
             Icon="Add" 
             Command="{x:Bind ViewModel.AddItemsCommand, Mode=OneTime}" />
         <AppBarButton
             RelativePanel.RightOf="AddButton"
+            RelativePanel.AlignVerticalCenterWith="AddButton"
             Icon="Clear"
             Command="{x:Bind ViewModel.ClearListCommand, Mode=OneTime}" />
-
     </RelativePanel>
 </UserControl>

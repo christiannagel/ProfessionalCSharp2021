@@ -8,8 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-
+    <StackPanel Margin="12" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
         <views:SelectionView ViewModel="{x:Bind ViewModel, Mode=OneTime}" />
         <views:DisplayListView ViewModel="{x:Bind ViewModel, Mode=OneTime}" />
     </StackPanel>

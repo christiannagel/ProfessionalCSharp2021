@@ -22,46 +22,58 @@ public sealed partial class DisplayListView : UserControl
 
         WeakReferenceMessenger.Default.Register<AddItemMessage>(this, (r, m) =>
         {
+            static void Animate(ConnectedAnimationService animationService, string key, UIElement target)
+            {
+                var animation = animationService.GetAnimation(key);
+                // animation.Configuration = new GravityConnectedAnimationConfiguration();
+                // animation.Configuration = new DirectConnectedAnimationConfiguration();
+                // animation.Configuration = new BasicConnectedAnimationConfiguration();
+                animation.TryStart(target);
+            }
+            
             if (m.Status == "Completed")
             {
-                var connectedAnimation = ConnectedAnimationService.GetForCurrentView();
-                var f = connectedAnimation.DefaultEasingFunction;
-                connectedAnimation.DefaultEasingFunction = CompositionEasingFunction.CreateElasticEasingFunction(f.Compositor, CompositionEasingFunctionMode.Out, 5, 5); //.CreateBackEasingFunction(f.Compositor, CompositionEasingFunctionMode.Out, 20);
-                var animation1 = connectedAnimation?.GetAnimation("item1");
-                var animation2 = connectedAnimation?.GetAnimation("item2");
+                var animationService = ConnectedAnimationService.GetForCurrentView();
+                var easing = animationService.DefaultEasingFunction;
+
+                // animationService.DefaultEasingFunction = CompositionEasingFunction.CreateBounceEasingFunction(easing.Compositor, CompositionEasingFunctionMode.Out, 3, 1.5F);
+                // animationService.DefaultEasingFunction = CompositionEasingFunction.CreateElasticEasingFunction(easing.Compositor, CompositionEasingFunctionMode.Out, 4, 4);
+                // animationService.DefaultEasingFunction = CompositionEasingFunction.CreateStepEasingFunction(easing.Compositor, 14);
+                //                animationService.DefaultEasingFunction = CompositionEasingFunction.CreatePowerEasingFunction(easing.Compositor, CompositionEasingFunctionMode.Out, 8);
+                // connectedAnimation.DefaultEasingFunction = CompositionEasingFunction.CreateElasticEasingFunction(f.Compositor, CompositionEasingFunctionMode.Out, 3, 8); //.CreateBackEasingFunction(f.Compositor, CompositionEasingFunctionMode.Out, 20);
+                // animationService.DefaultDuration = TimeSpan.FromSeconds(1.5);
 
                 var container = AddedItemsList.ItemContainerGenerator.ContainerFromItem(m.DisplayItem);
 
-                var items = FindItems<Ellipse>(container);
-
-                ConnectedAnimation?[] animations = new[] { animation1, animation2 };
-                Ellipse[] targets = items.ToArray();
-
-                for (int i = 0; i < 2; i++)
+                var items = FindItemsOfType<Ellipse>(container).ToList();
+                for (int i = 0; i < items.Count; i++)
                 {
-                    animations[i]?.TryStart(targets[i]);
+                    Animate(animationService, $"item{i + 1}", items[i]);
                 }
             }
         });
     }
 
-    private IEnumerable<T> FindItems<T>(DependencyObject container) where T : DependencyObject
+    private IEnumerable<T> FindItemsOfType<T>(DependencyObject container) 
+        where T : DependencyObject
     {
-        var items = new List<T>();
-        var children = VisualTreeHelper.GetChildrenCount(container);
-        for (int i = 0; i < children; i++)
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(container); i++)
         {
             var child = VisualTreeHelper.GetChild(container, i);
-            if (child is T)
+            if (child is null)
             {
-                items.Add((T)child);
+                yield break;
             }
-            else
+            if (child is T item)
             {
-                items.AddRange(FindItems<T>(child));
+                yield return item;
+            }
+
+            foreach (T childOfChild in FindItemsOfType<T>(child))
+            {
+                yield return childOfChild;
             }
         }
-        return items;
     }
 
     public MainViewModel ViewModel

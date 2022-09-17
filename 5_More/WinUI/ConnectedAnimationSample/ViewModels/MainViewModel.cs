@@ -25,9 +25,7 @@ public partial class MainViewModel
 
     [ICommand]
     private void AddItems()
-    {
-
-        
+    {      
         if (SelectedItem1 is not null && SelectedItem2 is not null)
         {
             WeakReferenceMessenger.Default.Send(new AddItemMessage("Started"));

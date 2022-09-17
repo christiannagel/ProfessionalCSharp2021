@@ -30,7 +30,7 @@
 
 
     <DataTemplate x:Key="ItemTemplate" x:DataType="models:Item">
-        <Grid>
+        <Grid x:Name="grid1">
             <Ellipse Width="100" Height="100" Fill="{Binding Mode=OneWay, Converter={StaticResource ItemToBrushConverter}}" />
         </Grid>
     </DataTemplate>

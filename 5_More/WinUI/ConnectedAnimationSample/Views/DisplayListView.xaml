@@ -8,7 +8,6 @@
     mc:Ignorable="d">
 
     <Grid>
-
         <ListBox 
             x:Name="AddedItemsList"
             ItemsSource="{x:Bind ViewModel.AddedItems, Mode=OneWay}"
