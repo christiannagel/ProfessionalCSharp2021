@@ -2,11 +2,11 @@
 
 ## Implicit Namespaces
 
-[Microsoft.Net.Sdk adds implicit namespaces](https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/implicit-namespaces)
+[.NET 6 adds implicit usings](https://learn.microsoft.com/dotnet/core/project-sdk/overview#implicit-using-directives?WT.mc_id=DT-MVP-10160)
 
 ## Global Using Directive
 
-[global using directive](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-10.0/globalusingdirective)
+[global using directive](https://learn.microsoft.com/dotnet/csharp/language-reference/proposals/csharp-10.0/globalusingdirective?WT.mc_id=DT-MVP-10160)
 
 Chapter 2, StringSample
 
@@ -44,6 +44,12 @@ Instead of using Marshal.GetLastWin32Error, Marshal.GetLastPInvokeError can be u
 
 See chapter 18, *Files and Streams* for more information on JSON.
 
+## Networking
+
+ASP.NET Core 6 adds the `WebApplicationBuilder` and `WebApplication classes which abstracts the `Host` class. The code in the repo has been updated to use the `WebApplication` and `WebApplicationBuilder` classes.
+
+See chapter 19, "Networking" for more information on network programming.
+
 ## Security
 
 Sample code: **X509CertificateSample**
@@ -52,7 +58,7 @@ With .NET 6, the `Key` property of the `PublicKey` property is deprecated. The s
 
 See chapter 20, *Security* for more information on security.
 
-## Ef Core
+## EF Core
 
 New feature with EF Core 6:
 

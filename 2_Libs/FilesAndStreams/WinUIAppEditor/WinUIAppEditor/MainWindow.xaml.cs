@@ -1,4 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+
 using System.Runtime.InteropServices;
 using System.Text;
 using Windows.Storage;
@@ -61,8 +63,7 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MessageDialog dlg = new(ex.Message, "Error");
-            await dlg.ShowAsync();
+            await ShowErrorAsync(ex.Message);
         }
     }
 
@@ -91,8 +92,7 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MessageDialog dlg = new(ex.Message, "Error");
-            await dlg.ShowAsync();
+            await ShowErrorAsync(ex.Message);
         }
     }
 
@@ -105,12 +105,12 @@ public sealed partial class MainWindow : Window
                 SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
                 SuggestedFileName = "New Document"
             };
-            picker.FileTypeChoices.Add("Plain Text", new List<string>() { ".txt" });
+            picker.FileTypeChoices.Add("Plain Text", [".txt"]);
 
             InitializeActiveWindow(picker);
 
             StorageFile file = await picker.PickSaveFileAsync();
-            if (file != null)
+            if (file is not null)
             {
                 using StorageStreamTransaction tx = await file.OpenTransactedWriteAsync();
                 Stream stream = tx.Stream.AsStreamForWrite();
@@ -125,8 +125,7 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MessageDialog dlg = new(ex.Message, "Error");
-            await dlg.ShowAsync();
+            await ShowErrorAsync(ex.Message);
         }
     }
 
@@ -139,7 +138,7 @@ public sealed partial class MainWindow : Window
                 SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
                 SuggestedFileName = "New Document"
             };
-            picker.FileTypeChoices.Add("Plain Text", new List<string>() { ".txt" });
+            picker.FileTypeChoices.Add("Plain Text", [".txt"]);
 
             InitializeActiveWindow(picker);
 
@@ -157,8 +156,19 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MessageDialog dlg = new(ex.Message, "Error");
-            await dlg.ShowAsync();
+            await ShowErrorAsync(ex.Message);
         }
+    }
+
+    private async Task ShowErrorAsync(string message)
+    {
+        ContentDialog dlg = new()
+        {
+            Title = "Error",
+            Content = message,
+            PrimaryButtonText = "OK",
+            XamlRoot = Content.XamlRoot
+        };
+        await dlg.ShowAsync();
     }
 }

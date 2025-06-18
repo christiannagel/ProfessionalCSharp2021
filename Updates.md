@@ -1,6 +1,7 @@
 # Book Updates and Issues
 
-> See [.NET 6 Updates](Dotnet6Updates.md) for changes with .NET 6
+* See [.NET 6 Updates](Dotnet6Updates.md) for changes with .NET 6
+* See [.NET 7 Updates](Dotnet7Updates.md) for changes with .NET 7
 
 ## Chapter 4, Object-Oriented Programming in C#
 
@@ -43,6 +44,24 @@ Page 190, the event name should be `NewCarCreated` instead of `NewCarInfo`:
 
 Thanks to [@DanielNikoofar](https://github.com/DanielNikoofar) for reporting this issue!
 
+Page 191, the method should be `CreateANewCar` instead of `NewCar()`, and the event `NewCarCreated` instead of `NewCarInfo` (also see page 190).
+
+```csharp
+CarDealer dealer = new();
+Consumer sebastian = new("Sebastian");
+dealer.NewCarCreated += sebastian.NewCarIsHere;
+dealer.CreateANewCar("Williams");
+Consumer max = new("Max");
+dealer.NewCarCreated += max.NewCarIsHere;
+dealer.CreateANewCar("Aston Martin");
+dealer.NewCarCreated -= sebastian.NewCarIsHere;
+dealer.CreateANewCar("Ferrari");
+```
+
+[See source code - EventsSample/Program.cs](https://github.com/ProfessionalCSharp/ProfessionalCSharp2021/blob/main/1_CS/Delegates/EventsSample/Program.cs)
+
+Thanks to [@zpfdev](https://github.com/zpfdev)) for reporting this issue!
+
 ## Chapter 11, Tasks and Asynchronous Programming
 
 Page 296 shows this source code:
@@ -81,6 +100,118 @@ static ServiceProvider GetServiceProvider()
   services.AddTransient<HomeController>();
   return services.BuildServiceProvider();
 }
+```
+
+Page 400, section *Using Scoped Services*
+
+The text
+
+*Let's start registering services with the local function `RegisterServices`.*
+
+Should be:
+
+*Let's start registering services with the method `UsingScoped`.*
+
+Thanks to [@ShervanN](https://github.com/ShervanN) for reporting this issue!
+
+## Chapter 16, Diagnostics and Metrics
+
+Page 422, the code snippet in the book misses a variable name. The variable `httpClient` should be added:
+
+```csharp
+public NetworkService(HttpClient httpClient, ILogger<NetworkService> logger)
+{
+  _httpClient = httpClient;
+  _logger = logger;
+  _logger.LogTrace("ILogger injected into {service}", nameof(NetworkService));
+}
+```
+
+Thanks to [@ShervanN](https://github.com/ShervanN) for reporting this issue!
+
+## Chapter 17, Parallel Programming
+
+Page 451, the code snippet can be simplified - retrieving the result is done two times, and `Result` is already blocking:
+
+The previous code was:
+
+```csharp
+public static void TaskWithResultDemo()
+{
+  Task<(int Result, int Remainder)> t1 = new(TaskWithResult, (8, 3));
+  t1.Start();
+  Console.WriteLine(t1.Result);
+  t1.Wait();
+  Console.WriteLine($"result from task: {t1.Result.Result}, and remainder: {t1.Result.Remainder}");
+}
+
+The new code is:
+
+```csharp
+public static void TaskWithResultDemo()
+{
+  Task<(int Result, int Remainder)> t1 = new(TaskWithResult, (8, 3));
+  t1.Start();
+  Console.WriteLine($"result from task: {t1.Result.Result}, and remainder: {t1.Result.Remainder}");
+}
+```
+
+Thanks to [@ShervanN](https://github.com/ShervanN) for reporting this issue!
+
+Page 461, Using the Timer Class
+
+The code in the book contains too many braces.
+
+This code:
+
+```csharp
+private static void ThreadingTimer()
+{
+  void TimeAction(object? o) =>
+    Console.WriteLine($"System.Threading.Timer {DateTime.Now:T}");
+
+  using Timer t1 = new(
+    TimeAction,
+    null,
+    dueTime: TimeSpan.FromSeconds(2),
+    period: TimeSpan.FromSeconds(3)))
+  {
+    Task.Delay(15000).Wait();
+  }
+}
+```
+
+should be (remove the braces with the using declaration):
+
+```csharp
+private static void ThreadingTimer()
+{
+  void TimeAction(object? o) =>
+    Console.WriteLine($"System.Threading.Timer {DateTime.Now:T}");
+
+  using Timer t1 = new(
+    TimeAction,
+    null,
+    dueTime: TimeSpan.FromSeconds(2),
+    period: TimeSpan.FromSeconds(3));
+
+  Task.Delay(15000).Wait();
+}
+```
+
+With the new version, this code has been updated to top-level statements without the `ThreadingTimer` method (see the [current source code](https://github.com/ProfessionalCSharp/ProfessionalCSharp2021/blob/main/2_Libs/Parallel/ParallelSamples/TimersSample/Program.cs)
+
+```csharp
+static void TimeAction(object? o) =>
+    Console.WriteLine($"System.Threading.Timer {DateTime.Now:T}");
+
+using Timer t1 = new(
+    TimeAction, 
+    null, 
+    dueTime: TimeSpan.FromSeconds(2),
+    period: TimeSpan.FromSeconds(3));
+
+await Task.Delay(15000);
 ```
 
 Thanks to [@ShervanN](https://github.com/ShervanN) for reporting this issue!

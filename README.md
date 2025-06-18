@@ -19,8 +19,9 @@ See the [WinUI.md](WinUI.md) for the requirements of building and running the Wi
 * See [updates](Updates.md) for issues in the book and updates. 
 * See [.NET 6 Updates](Dotnet6Updates.md) for changes with .NET 6 and C# 10.
 * See [.NET 7 Updates](Dotnet7Updates.md) for changes with .NET 7 and C# 11.
+* See [.NET 8 Updates](Dotnet8Updates.md) for changes with .NET 8 and C# 12.
 
-The *main* branch is the actual working branch with code samples updated to .NET 7 and C# 11. Every code sample should compile and run successfully (with the deadlock and race-conditions samples, *successfully* means that a deadlock and a race-condition occurs).
+The *main* branch is the actual working branch with code samples updated to .NET 8 and C# 12. Every code sample should compile and run successfully (with the deadlock and race-conditions samples, *successfully* means that a deadlock and a race-condition occurs).
 
 The *dotnet5* branch is used to show the samples how they appear in the printed book.
 
@@ -28,7 +29,7 @@ The *dotnet6* branch is used to give you the .NET 6 (LTS) version.
 
 ## Issues and Discussions
 
-If you find some problems with the source code, issues to compile and run the samples, please create an [issue](https://github.com/ProfessionalCSharp/ProfessionalCSharp2021/issues). 
+If you find some problems with the source code, issues to compile and run the downloaded samples, please create an [issue](https://github.com/ProfessionalCSharp/ProfessionalCSharp2021/issues). 
 
 If you have some questions about the code samples, or just want to drop a message, you're welcome to use [Discussions](https://github.com/ProfessionalCSharp/ProfessionalCSharp2021/discussions).
 
@@ -97,14 +98,23 @@ Additional articles and samples related to the book
 * [PriorityQueue - Source Code](5_More/Collections/PriorityQueueSample)
 * [Synchronization Context - Article](https://csharp.christiannagel.com/2022/09/06/whats-the-synchronizationcontext-used-for/)
 * [Synchronization Context - Source Code](5_More/Tasks/SynchronizationContext)
+* [Primary Constructors - Source Code](5_More/Types/PrimaryConstructors)
+* [Primary Constructors - Article](https://csharp.christiannagel.com/2023/03/28/primaryctors/)
+* [IParsable, ISpanParsable Interfaces - Source Code](5_More/Services/GamesApiDotnet7/)
+* [IParsable, ISpanParsable Interfaces - Article](https://csharp.christiannagel.com/2023/04/14/iparsable/)
 
 #### The Libraries
 
 * [Files and Streams: JSON DOM Serialization - Source Code](5_More/FilesAndStreams/JsonSample/)
+* [Files and Streams:System.Text.Json Serializing Hierarchical Data - Article](https://csharp.christiannagel.com/2023/03/14/system-text-json-serializing-hierarchical-data/)
+* [Files and Streams: System.Text.Json Serializing Hierarchical Data - Source Code](5_More/FilesAndStreams/JsonInheritance/)
+* [Files and Streams: System.Text.Json Serializing Hierarchical Data with Source Generator](5_More/FilesAndStreams/JsonInheritanceWithSourceGenerator/)
 * [EF Core: Temporal Tables - Article](https://csharp.christiannagel.com/2022/01/31/efcoretemporaltables/)
 * [EF Core: Temporal Tables - Source Code](5_More/EFCore/TemporalTableSample)
 * [EF Core: Using MySQL in a Docker container with EF Core - Source Code](5_More/EFCore/MySQL/)
 * [EF Core: Using MySQL in a Docker container with EF Core - Article](https://csharp.christiannagel.com/2022/05/17/mysqlwithefcoreanddocker/)
+* [EF Core Mapping with Generic Types, Value Conversion, and JSON Columns - Source Code](5_More/EFCore//InhertianceMappingWithConversion/)
+* [EF Core Mapping with Generic Types, Value Conversion, and JSON Columns - Article](https://csharp.christiannagel.com/2023/03/07/ef-core-mapping-with-generic-types-value-conversion-and-json-columns/)
 
 #### Web Apps and Services
 
@@ -113,6 +123,14 @@ Additional articles and samples related to the book
 * [Upgrading an ASP.NET Core Web API Project to .NET 6 - Source Code](5_More/Services/APIServiceUpdate/)
 * [Creating a Windows Service with .NET 6 - Article](https://csharp.christiannagel.com/2022/03/22/windowsservice-2/)
 * [Creating a Windows Service with .NET 6 - Source Code](5_More/WindowsServices/)
+* [HTTP tools to debug Web APIs - Article](https://csharp.christiannagel.com/2023/03/21/httptools/)
+* [Web API Updates with .NET 8 - Source Code](5_More/Services/TodoAPI)
+* [Web API Updates with .NET 8 - Article](https://csharp.christiannagel.com/2023/04/19/api-dotnet8/)
+* [Minimal API Updates with .NET 7 - .NET 6 version source code](5_More/Services/GamesApiDotnet6/)
+* [Minimal API Updates with .NET 7 - Source Code](5_More/Services/GamesApiDotnet7/)
+* [Minimal API Updates with .NET 7 - Article](https://csharp.christiannagel.com/2023/05/03/minimal-api-growing-with-net-7/)
+* [Starting .NET Aspire with existing API - Source Code](5_More/Aspire/StartingAspireWithExistingAPI/)
+* [Starting .NET Aspire with existing API - Article](https://csharp.christiannagel.com/2025/05/08/why-dotnet-aspire/)
 
 ### Windows Apps
 
